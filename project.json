@@ -1,0 +1,17 @@
+{
+  "s3": {
+    "stage": {
+      "bucket": "projects-staging.seattletimes.com",
+      "path": "indefinite-troop"
+    },
+    "live": {
+      "bucket": "projects.seattletimes.com",
+      "path": "2017/business/rent-hike"
+    }
+  },
+  "title": "",
+  "description": "",
+  "url": "",
+  "slug": "",
+  "tags": []
+}

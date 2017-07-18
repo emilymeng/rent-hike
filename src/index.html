@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>
+    <%= json.project.title %>
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Safari, you're the worst -->
+  <meta name='format-detection' content='telephone=no'>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <%= t.include("partials/_head.html") %>
+</head>
+
+<body>
+
+  <responsive-child class="map-container">
+    <div class="outmost">
+      <section class="chatter">
+        <h1>Where rent is the highest, and rising fastest</h1>
+        <p>Click on each area to see the current average rent, and how much that has gone up in the past year.</p>
+      </section>
+
+
+      <div class="aspect-ratio-outer">
+        <div class="aspect-ratio-inner">
+
+          <leaflet-map zoom=9>
+            <tile-layer layer="cartoPositron"></tile-layer>
+
+          </leaflet-map>
+
+        </div>
+        <aside class="legend">
+          <h1>2017 Monthly rents*</h1>
+          <ul class="scale">
+            <li>
+              <span class="block" style="background-color: #d64b13"></span> $2,100 and up</li>
+            <li>
+              <span class="block" style="background-color: #f99f4e"></span> $1,900-$2,099</li>
+            <li>
+              <span class="block" style="background-color: #fff9c0"></span> $1,700-$1,899</li>
+            <li>
+              <span class="block" style="background-color: #c4e5ae"></span> $1,500-$1,699</li>
+            <li>
+              <span class="block" style="background-color: #88aa65"></span> $1,300-$1,499</li>
+            <li>
+              <span class="block" style="background-color: #63775B"></span> $1,100-$1,299</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="source">*Based on second quarter numbers
+      <br><span class="source">Source: Apartment Insights Washington
+        <span class="credit">EMILY M. ENG / THE SEATTLE TIMES</div>
+
+    </div>
+  </responsive-child>
+
+  <script src="app.js"></script>
+  <% /*= t.include("partials/_foot.html"); */ %>
+    <%= t.include("partials/_workHere.html") %>
+</body>
+
+</html>
