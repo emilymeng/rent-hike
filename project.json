@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "projects-staging.seattletimes.com",
-      "path": "indefinite-troop"
+      "path": "modest-abuse"
     },
     "live": {
       "bucket": "projects.seattletimes.com",
-      "path": "2017/business/rent-hike"
+      "path": "2018/business/rent-hike"
     }
   },
   "title": "",
