@@ -42,7 +42,7 @@ console.log(feature.properties.city, commafy(feature.properties.Q2017));
 2017 monthly rent: $${commafy(feature.properties.Q2017)}<br>
 2016 monthly rent: $${commafy(feature.properties.Q2016)}<br>
 Yearly change: ${feature.properties.YoY}%<br>
-Quartly change: ${feature.properties.QoQ}%<br>
+Quarterly change: ${feature.properties.QoQ}%<br>
         `);
         layer.setStyle({ weight: 2, fillOpacity: 1 });
       },
