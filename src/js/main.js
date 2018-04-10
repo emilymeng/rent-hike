@@ -7,7 +7,7 @@ var element = document.querySelector("leaflet-map");
 var L = element.leaflet;
 var map = element.map;
 
-var data = require("./rentDataQ4.geo.json");
+var data = require("./rent-slowdown-Q1.geo.json");
 
 var mapElement = document.querySelector("leaflet-map");
 
@@ -19,12 +19,12 @@ if (mapElement) {
 
   var focused = false;
 
-  var year = "Q2017";
+  var year = "Q12018";
 
   var commafy = s => (s * 1).toLocaleString().replace(/\.0+$/, "");
   
   data.features.forEach(function(f) {
-  ["YoY", "QoQ"].forEach(function(prop) {
+  ["Yearly", "Quarterly"].forEach(function(prop) {
     f.properties[prop] = (f.properties[prop] * 1).toFixed(1);
   });
 });
@@ -34,16 +34,19 @@ if (mapElement) {
     layer.bindPopup("", {
       minWidth: 200
     });
-console.log(feature.properties.city, commafy(feature.properties.Q2017));
+
+console.log(feature.properties.city, commafy(feature.properties.Q12017));
+    
     layer.on({
       popupopen: function(e) {
         e.popup.setContent(`
 <h4>${feature.properties.city}</h4>
-2017 monthly rent: $${commafy(feature.properties.Q2017)}<br>
-2016 monthly rent: $${commafy(feature.properties.Q2016)}<br>
-Yearly change: ${feature.properties.YoY}%<br>
-Quarterly change: ${feature.properties.QoQ}%<br>
+2018 monthly rent: $${commafy(feature.properties.Q12018)}<br>
+2017 monthly rent: $${commafy(feature.properties.Q12017)}<br>
+Yearly change: ${feature.properties.Yearly}%<br>
+Quarterly change: ${feature.properties.Quarterly}%<br>
         `);
+
         layer.setStyle({ weight: 2, fillOpacity: 1 });
       },
       mouseover: function(e) {
