@@ -9,6 +9,10 @@ var map = element.map;
 
 var data = require("./rent-slowdown-Q1.geo.json");
 
+var ich = require("icanhaz");
+var templateFile = require("./_popup.html");
+ich.addTemplate("popup", templateFile);
+
 var mapElement = document.querySelector("leaflet-map");
 
 if (mapElement) {
@@ -35,18 +39,15 @@ if (mapElement) {
       minWidth: 200
     });
 
-console.log(feature.properties.city, commafy(feature.properties.Q12017));
-    
+console.log(feature.properties.city, commafy(feature.properties.Q12017)); 
     layer.on({
       popupopen: function(e) {
         e.popup.setContent(`
-<h4>${feature.properties.city}</h4>
-2018 monthly rent: $${commafy(feature.properties.Q12018)}<br>
-2017 monthly rent: $${commafy(feature.properties.Q12017)}<br>
-Yearly change: ${feature.properties.Yearly}%<br>
-Quarterly change: ${feature.properties.Quarterly}%<br>
-        `);
-
+            <h4>${feature.properties.city}</h4>
+            2018 monthly rent: $${commafy(feature.properties.Q12018)}<br>
+            2017 monthly rent: $${commafy(feature.properties.Q12017)}<br>
+            Yearly change: ${feature.properties.Yearly}%<br>
+            Quarterly change: ${feature.properties.Quarterly}%<br>`);
         layer.setStyle({ weight: 2, fillOpacity: 1 });
       },
       mouseover: function(e) {
@@ -102,6 +103,7 @@ Quarterly change: ${feature.properties.Quarterly}%<br>
     onEachFeature: onEachFeature
   }).addTo(map);
 
-}
+  }
 
- map.scrollWheelZoom.disable();
+map.setView([47.609, -121.900], 9);
+
