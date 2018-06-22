@@ -7,7 +7,7 @@ var element = document.querySelector("leaflet-map");
 var L = element.leaflet;
 var map = element.map;
 
-var data = require("./rent-slowdown-Q1.geo.json");
+var data = require("./apartment-vacancy.geo.json");
 
 var ich = require("icanhaz");
 var templateFile = require("./_popup.html");
@@ -23,7 +23,7 @@ if (mapElement) {
 
   var focused = false;
 
-  var year = "Q12018";
+  var year = "vacancy";
 
   var commafy = s => (s * 1).toLocaleString().replace(/\.0+$/, "");
   
@@ -44,6 +44,7 @@ console.log(feature.properties.city, commafy(feature.properties.Q12017));
       popupopen: function(e) {
         e.popup.setContent(`
             <h4>${feature.properties.city}</h4>
+            Vacancy rate: ${feature.properties.vacancy}%<br>
             2018 monthly rent: $${commafy(feature.properties.Q12018)}<br>
             2017 monthly rent: $${commafy(feature.properties.Q12017)}<br>
             Yearly change: ${feature.properties.Yearly}%<br>
@@ -55,14 +56,14 @@ console.log(feature.properties.city, commafy(feature.properties.Q12017));
       },
       mouseout: function(e) {
         if (focused && focused == layer) { return }
-        layer.setStyle({ weight: 0.5, fillOpacity: 0.5 });
+        layer.setStyle({ weight: 0.6, fillOpacity: 0.7 });
       }
     });
   };
 
   map.on("popupclose", function() {
     if (focused) {
-      focused.setStyle({ weight: 0.5, fillOpacity: 0.7 });
+      focused.setStyle({ weight: 0.6, fillOpacity: 0.7 });
       focused = false;
     }
   });
@@ -75,13 +76,11 @@ console.log(feature.properties.city, commafy(feature.properties.Q12017));
     console.log(value)
     if (typeof value != "undefined") {
       // condition ? if-true : if-false;
-     return value >= 2100 ? '#d64b13' :
-             value >= 1900 ? '#f99f4e' :
-             value >= 1700 ? '#fff9c0' :
-             value >= 1500 ? '#c4e5ae' :
-             value >= 1300 ? '#88aa65' :
-             value >= 1100 ? '#63775B' :
-             'pink' ;
+     return value >= 15.0 ? '#4d004b' :
+             value >= 11.0 ? '#88419d' :
+             value >= 7.0 ? '#8c6bb1' :
+             value >= 4.0 ? '#bcbddc' :
+             '#bfd3e6' ;
     } else {
       return "gray"
     }
@@ -90,10 +89,10 @@ console.log(feature.properties.city, commafy(feature.properties.Q12017));
   var style = function(feature) {
     var s = {
       fillColor: getColor(feature.properties),
-      weight: 0.5,
+      weight: 0.6,
       opacity: 1,
       color: 'white',
-      fillOpacity: 0.5
+      fillOpacity: 0.7
     };
     return s;
   }
