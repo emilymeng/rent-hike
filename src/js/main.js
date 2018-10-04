@@ -7,7 +7,7 @@ var element = document.querySelector("leaflet-map");
 var L = element.leaflet;
 var map = element.map;
 
-var data = require("./rent-slowdown-Q1.geo.json");
+var data = require("./rentDataQ3-2018.geo.json");
 
 var ich = require("icanhaz");
 var templateFile = require("./_popup.html");
@@ -23,12 +23,12 @@ if (mapElement) {
 
   var focused = false;
 
-  var year = "Q12018";
+  var year = "YoY";
 
   var commafy = s => (s * 1).toLocaleString().replace(/\.0+$/, "");
   
   data.features.forEach(function(f) {
-  ["Yearly", "Quarterly"].forEach(function(prop) {
+  ["QoQ", "YoY"].forEach(function(prop) {
     f.properties[prop] = (f.properties[prop] * 1).toFixed(1);
   });
 });
@@ -44,10 +44,11 @@ console.log(feature.properties.city, commafy(feature.properties.Q12017));
       popupopen: function(e) {
         e.popup.setContent(`
             <h4>${feature.properties.city}</h4>
-            2018 monthly rent: $${commafy(feature.properties.Q12018)}<br>
-            2017 monthly rent: $${commafy(feature.properties.Q12017)}<br>
-            Yearly change: ${feature.properties.Yearly}%<br>
-            Quarterly change: ${feature.properties.Quarterly}%<br>`);
+            2018 monthly rent: $${commafy(feature.properties.Q3Y2018)}<br>
+            2017 monthly rent: $${commafy(feature.properties.Q3Y2017)}<br>
+            <br>
+            Yearly change: ${feature.properties.YoY}%<br>
+            Quarterly change: ${feature.properties.QoQ}%<br>`);
         layer.setStyle({ weight: 2, fillOpacity: 1 });
       },
       mouseover: function(e) {
@@ -75,13 +76,13 @@ console.log(feature.properties.city, commafy(feature.properties.Q12017));
     console.log(value)
     if (typeof value != "undefined") {
       // condition ? if-true : if-false;
-     return value >= 2100 ? '#d64b13' :
-             value >= 1900 ? '#f99f4e' :
-             value >= 1700 ? '#fff9c0' :
-             value >= 1500 ? '#c4e5ae' :
-             value >= 1300 ? '#88aa65' :
-             value >= 1100 ? '#63775B' :
-             'pink' ;
+     return value >= 10 ? '#bf2027' :
+             // value >= 8 ? '#d64b13' :
+             value >= 7.5 ? '#d64b13' :
+             value >= 5 ? '#f99f4e' :
+             value >= 2.5 ? '#fff9c0' :
+             value >= 0 ? '#c4e5ae' :
+             '#88aa65' ;
     } else {
       return "gray"
     }
@@ -105,5 +106,5 @@ console.log(feature.properties.city, commafy(feature.properties.Q12017));
 
   }
 
-map.setView([47.609, -121.900], 9);
+map.setView([47.609, -122.200], 9);
 
