@@ -7,7 +7,7 @@ var element = document.querySelector("leaflet-map");
 var L = element.leaflet;
 var map = element.map;
 
-var data = require("./rentDataQ3-2018.geo.json");
+var data = require("./rentDataQ4-2018.geo.json");
 
 var ich = require("icanhaz");
 var templateFile = require("./_popup.html");
@@ -39,13 +39,12 @@ if (mapElement) {
       minWidth: 200
     });
 
-console.log(feature.properties.city, commafy(feature.properties.Q12017)); 
     layer.on({
       popupopen: function(e) {
         e.popup.setContent(`
             <h4>${feature.properties.city}</h4>
-            2018 monthly rent: $${commafy(feature.properties.Q3Y2018)}<br>
-            2017 monthly rent: $${commafy(feature.properties.Q3Y2017)}<br>
+            2018 monthly rent: $${commafy(feature.properties.Q4Y2018)}<br>
+            2017 monthly rent: $${commafy(feature.properties.Q4Y2017)}<br>
             <br>
             Yearly change: ${feature.properties.YoY}%<br>
             Quarterly change: ${feature.properties.QoQ}%<br>`);
